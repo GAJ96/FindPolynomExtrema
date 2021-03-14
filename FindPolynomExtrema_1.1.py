@@ -37,9 +37,17 @@ print("")
 print("")
 print("_________________________Find the extreme points of polynomials____________________________")
 print("")
-print("In order to solve for the polinomials exreme points it needs to be represented as below:")
-print("a1 * x^b + a2 * x^(b-1) + ... + an * x^0")
+print("Represent the polynomial as below:")
+print("a1*x^b1 + a2*x^b2 + ... + an*x^bn")
 print("")
+print("Input the coefficients and exponents respectively separated by one space each when prompted.")
+print("For the polynomial P(x) = a1x^b1 + a2x^b2 + a3x^b3 the input should look like:")
+print("Prompt for coefficients: a1 a2 a3")
+print("Prompt for exponents: b1 b2 b3")
+print("")
+print("NOTE:        The order in which the coefficients and exponents are entered must match so that the")
+print("             elements in each correspond to the same term in the polynomial.")
+print("             EVEN EXPONENTS OF POWER 0 MUST BE INCLUDED!!!")
 print("___________________________________________________________________________________________")
 print("")
 while True:
@@ -66,11 +74,14 @@ if max(exponents) < 2:
     exit()
 
 # Polynomial
-#def p(x):
-#  summa = 0
-#  for i in range(0, len(coefficients) ):
-#    summa += coefficients[i] * x ** exponents[i]
-#  return summa
+polynom = copy.deepcopy(coefficients)
+for i in range(0, len(coefficients) ):      # Put the polynomial together
+    polynom[i] = [str(coefficients[i]),"x^",str(exponents[i])]
+sepnull = ""
+sepplus = "+"
+for i in range(0, len(polynom)):
+    polynom[i] = sepnull.join(polynom[i])   # Take away the ugly things in the elements/terms
+polynom = sepplus.join(polynom)             # Add a plus inbetween terms/elements
 
 # First derivative
 def fprim(x):
@@ -165,21 +176,20 @@ if fprim(initialguess) < 0:
     elif fbis(lowlim) == fbis(uplim) == 0:
         typ = "inflexion point"
 
-#for
-#coefficients[i]+"*x^("exponents[i]+")"
-
 
 # Output:
-#print("Your polynomial:    ", a1,"x^",b)
+print("Your polynomial:    ", polynom)
 print("___________________________________________________________________________________________")
 print("")
 print("___Output___")
 print("Location on the x-axis:...(",lowlim,";",uplim,")")
 print("Type of extrema:...........", typ)
-print("Inneriterations:............... ", inneriterations)
-print("Outeriterations:............... ", outeriterations)
+print("Inneriterations:.......... ", inneriterations)
+print("Outeriterations:.......... ", outeriterations)
 t1 = process_time()
 print("Timer:....................[", t1-t0, "]")
+print("")
+print("The derivative at x=",lowlim," is ",fprim(lowlim)," and at x=",uplim," it is ",fprim(uplim),".")
 if typ == "inflexion point":
     print("")
     print("Note: An inflexion point can be a stationary point but is never an extrema.")
