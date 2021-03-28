@@ -34,7 +34,7 @@ layout = [ [sg.Text("Represent the polynomial as below:")],                     
 
 margins = (100, 40)                                                                            # (width, height)
 
-window = sg.Window(title = title, layout = layout, margins = margins)                           # This is the window
+window = sg.Window(title = title, layout = layout, resizable = True, margins = margins)                           # This is the window
 
 
 while True:
